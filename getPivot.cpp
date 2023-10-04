@@ -1,32 +1,32 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
+#include<vector>
 
-int getPivot(int arr[], int n)
+
+class Solution
 {
-
-    int s = 0;
-    int e = n - 1;
-    int mid = s + (e - s) / 2;
-
-    while (s < e)
+public:
+    int searchInsert(vector<int> &nums, int target)
     {
+        int s = 0;
+        int e = nums.size() - 1;
 
-        if (arr[mid] >= arr[0])
+        while (s <= e)
         {
-            s = mid + 1;
+            int mid = s + (e - s) / 2;
+            if (nums[mid] == target)
+            {
+                return mid;
+            }
+            else if (nums[mid] > target)
+            {
+                e = mid - 1;
+            }
+            else
+            {
+                s = mid + 1;
+            }
         }
-        else
-        {
-            e = mid;
-        }
-        mid = s + (e - s) / 2;
+        return s;
     }
-    return s;
-}
-
-int main()
-{
-
-    int arr[5] = {11, 12, 5, 8, 9};
-    cout << "Pivot element is: " << getPivot(arr, 5) << endl;
-}
+};

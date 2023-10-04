@@ -1,69 +1,32 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
+#include<vector>
 
-int firstOcc(int nums[], int n, int key)
+
+class Solution
 {
-
-    int s = 0, e = n - 1;
-    int mid = s + (e - s) / 2;
-    int ans = -1;
-
-    while (s <= e)
+public:
+    int searchInsert(vector<int> &nums, int target)
     {
-        int mid = s + (e - s) / 2;
-        if (nums[mid] == key)
+        int s = 0;
+        int e = nums.size() - 1;
+
+        while (s <= e)
         {
-            ans = mid;
-            e = mid - 1;
+            int mid = s + (e - s) / 2;
+            if (nums[mid] == target)
+            {
+                return mid;
+            }
+            else if (nums[mid] > target)
+            {
+                e = mid - 1;
+            }
+            else
+            {
+                s = mid + 1;
+            }
         }
-        else if (nums[mid] < key)
-        {
-            s = mid + 1;
-        }
-        else if (nums[mid] > key)
-        {
-            s = mid - 1;
-        }
-        mid = s + (e - s) / 2;
+        return s;
     }
-    return ans;
-}
-
-int lastOcc(int nums[], int n, int key)
-{
-
-    int s = 0, e = n - 1;
-
-    int ans = -1;
-
-    while (s <= e)
-    {
-        int mid = s + (e - s) / 2;
-        
-        if (nums[mid] == key)
-        {
-            ans = mid;
-            s = mid + 1;
-        }
-        else if (nums[mid] < key)
-        {
-            s = mid + 1;
-        }
-        else if (nums[mid] > key)
-        {
-            s = mid - 1;
-        }
-        mid = s + (e - s) / 2;
-    }
-    return ans;
-}
-
-int main()
-{
-    int arr[6] = {2, 4, 5, 3, 3, 5};
-    
-    cout << "First occurance of 3 is at index: " << firstOcc(arr, 6, 3) << endl;
-    cout << "Last occurance of 3 is at index: " << lastOcc(arr, 6, 3) << endl;
-
-    return 0;
-}
+};
