@@ -1,31 +1,41 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-
-class Solution
+int main()
 {
-public:
-    int minimumRightShifts(vector<int> &nums)
-    {
-        int n = nums.size();
-        vector<int> sorted_nums = nums;
-        sort(sorted_nums.begin(), sorted_nums.end());
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
-        for (int i = 0; i < n; ++i)
-        {
-            bool is_sorted = true;
-            for (int j = 0; j < n; ++j)
-            {
-                if (sorted_nums[j] != nums[(j + i) % n])
-                {
-                    is_sorted = false;
-                    break;
-                }
-            }
-            if (is_sorted)
-            {
-                return n - i;
-            }
+    int t;
+    cin >> t;
+    while(t--){
+        int number;
+        cin >> number;
+        int n = number;
+        int x = floor(log10(abs(n))) + 1;
+
+        while (n >= 100) {
+            n /= 10;
+        }
+
+        if(x==3){
+            if(number%100 >= 2 && n == 10) {cout << "YES" << endl;}
+            else cout << "NO" << endl;
+        }
+
+        else if(x==4){
+
+            int tensPlace = (number / 10) % 10;
+            if((number%100>=2) && (n == 10) && (tensPlace!=0)) {cout << "YES" << endl;}
+            else cout << "NO" << endl;
+        }
+
+        else if(x==5){
+            int hunPlace = (number / 100) % 10;
+            if((number%100>=2)&&(n == 10) && (hunPlace!=0)) {cout << "YES" << endl;}
+            else cout << "NO" << endl;
         }
     }
-            };
+
+    return 0;
+}
